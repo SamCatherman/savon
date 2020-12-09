@@ -7,6 +7,7 @@ module Savon
   InvalidResponseError  = Class.new(Error)
 
   def self.client(globals = {}, &block)
+    puts "globals on initialize Client: #{globals}"
     Client.new(globals, &block)
   end
 

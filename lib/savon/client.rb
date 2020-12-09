@@ -56,7 +56,8 @@ module Savon
 
     def build_wsdl_document
       @wsdl = Wasabi::Document.new
-
+      puts "building wsdl document: #{@globals[:wsdl]}"
+      byebug
       @wsdl.document    = @globals[:wsdl]        if @globals.include? :wsdl
       @wsdl.endpoint    = @globals[:endpoint]    if @globals.include? :endpoint
       @wsdl.namespace   = @globals[:namespace]   if @globals.include? :namespace
