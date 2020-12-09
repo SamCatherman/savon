@@ -44,6 +44,8 @@ module Savon
 
     def build(locals = {}, &block)
       set_locals(locals, block)
+      puts "building builder..."
+      byebug
       Builder.new(@name, @wsdl, @globals, @locals)
     end
 
