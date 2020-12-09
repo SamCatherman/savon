@@ -30,7 +30,7 @@ module Savon
       @types = convert_type_definitions_to_hash
       @used_namespaces = convert_type_namespaces_to_hash
       puts "INITIALIZE"
-      byebug
+      puts "@used_namespaces: #{@used_namespaces}"
     end
 
     def pretty
@@ -103,8 +103,8 @@ module Savon
       @internal_namespace_count ||= 0
       puts "use namespace path: #{path}"
       puts "use namespace uri: #{uri}"
-      byebug
       unless identifier = namespace_by_uri(uri)
+        byebug
         identifier = "ins#{@internal_namespace_count}"
         namespaces["xmlns:#{identifier}"] = uri
         @internal_namespace_count += 1
@@ -118,13 +118,6 @@ module Savon
     end
 
     def namespaces
-      puts "##############################################"
-      puts "namespaces method namespace_identifier: #{namespace_identifier}"
-      puts "namespaces method @globals: #{@globals}"
-      puts "namespaces method @wsdl: #{@wsdl}"
-      puts "namespaces method env_namespace: #{env_namespace}"
-      byebug
-      puts "##############################################"
       @namespaces ||= begin
         namespaces = SCHEMA_TYPES.dup
 
@@ -218,6 +211,8 @@ module Savon
     end
 
     def namespace_by_uri(uri)
+      puts "namespace_by_uri namespaces.count: #{namespaces.count}"
+      puts "namespace_by_uri uri: #{uri}"
       namespaces.each do |candidate_identifier, candidate_uri|
         return candidate_identifier.gsub(/^xmlns:/, '') if candidate_uri == uri
       end
