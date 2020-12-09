@@ -211,16 +211,15 @@ module Savon
     end
 
     def namespace_by_uri(uri)
-      puts "namespace_by_uri namespaces.count: #{namespaces.count}"
-      puts "namespace_by_uri uri: #{uri}"
       namespaces.each do |candidate_identifier, candidate_uri|
-        puts "candidate_identifier: #{candidate_identifier}"
-        puts "candidate_uri: #{candidate_uri}"
         if candidate_uri == uri
-          byebug
+          puts "candidate_identifier: #{candidate_identifier}"
+          puts "candidate_uri: #{candidate_uri}"
           return candidate_identifier.gsub(/^xmlns:/, '') 
         end
       end
+      puts "namespace_by_uri returning nil!: #{namespaces.inspect}"
+      puts "namespace_by_uri uri: #{uri}"
       nil
     end
 
