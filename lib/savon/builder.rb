@@ -125,7 +125,6 @@ module Savon
 
     def namespaces
       @namespaces ||= begin
-        byebug
         namespaces = SCHEMA_TYPES.dup
 
         if namespace_identifier == nil
@@ -221,6 +220,10 @@ module Savon
 
     def namespace_by_uri(uri)
       namespaces.each do |candidate_identifier, candidate_uri|
+        if candidate_uri != uri
+          puts "mismatch IN LOOP candidate_uri: #{candidate_uri}"
+          puts "mismatch IN LOOP uri: #{uri}"
+        end
         return candidate_identifier.gsub(/^xmlns:/, '') if candidate_uri == uri
       end
       puts "namespace_by_uri returning nil!: #{namespaces.inspect}"
