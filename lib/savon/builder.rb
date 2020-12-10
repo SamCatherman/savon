@@ -108,9 +108,9 @@ module Savon
           # http://htng.org/PWSWG/2007/02/AsyncHeaders
         identifier = "ins#{@internal_namespace_count}"
         puts "***************************************"
-        puts "mismatch: #{identifier}"
-        puts "mismatch: #{path}"
-        puts "mismatch: #{uri}"
+        puts "mismatch identifier: #{identifier}"
+        puts "mismatch path: #{path}"
+        puts "mismatch uri: #{uri}"
         puts "***************************************"
         namespaces["xmlns:#{identifier}"] = uri
         @internal_namespace_count += 1
@@ -221,10 +221,10 @@ module Savon
     def namespace_by_uri(uri)
       namespaces.each do |candidate_identifier, candidate_uri|
         if candidate_uri == uri
+          puts "match in loop candidate_identifier: #{candidate_identifier}"
           puts "match in loop candidate_uri: #{candidate_uri}"
           puts "match in loop uri: #{uri}"
-          puts "match in loop uri: #{uri}"
-          puts "match in loop candidate_identifier.gsub(/^xmlns:/, ''): #{candidate_identifier.gsub(/^xmlns:/, '')}"
+          puts "REGEX match in loop candidate_identifier.gsub(/^xmlns:/, ''): #{candidate_identifier.gsub(/^xmlns:/, '')}"
           return candidate_identifier.gsub(/^xmlns:/, '')
         end
       end
