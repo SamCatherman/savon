@@ -220,11 +220,13 @@ module Savon
 
     def namespace_by_uri(uri)
       namespaces.each do |candidate_identifier, candidate_uri|
-        if candidate_uri != uri
-          puts "mismatch IN LOOP candidate_uri: #{candidate_uri}"
-          puts "mismatch IN LOOP uri: #{uri}"
+        if candidate_uri == uri
+          puts "match in loop candidate_uri: #{candidate_uri}"
+          puts "match in loop uri: #{uri}"
+          puts "match in loop uri: #{uri}"
+          puts "match in loop candidate_identifier.gsub(/^xmlns:/, ''): #{candidate_identifier.gsub(/^xmlns:/, '')}"
+          return candidate_identifier.gsub(/^xmlns:/, '')
         end
-        return candidate_identifier.gsub(/^xmlns:/, '') if candidate_uri == uri
       end
       puts "namespace_by_uri returning nil!: #{namespaces.inspect}"
       puts "namespace_by_uri uri: #{uri}"
