@@ -106,13 +106,15 @@ module Savon
           # http://www.opentravel.org/OTA/2003/05,
           # http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
           # http://htng.org/PWSWG/2007/02/AsyncHeaders
+          # since these have no namespace(?) they are added to namespaces
         identifier = "ins#{@internal_namespace_count}"
         puts "***************************************"
-        puts "mismatch identifier: #{identifier}"
         puts "mismatch path: #{path}"
         puts "mismatch uri: #{uri}"
+        puts "namespaces before adding #{identifier}: #{namespaces}"
         puts "***************************************"
         namespaces["xmlns:#{identifier}"] = uri
+        puts "namespaces after adding #{identifier}: #{namespaces}"
         @internal_namespace_count += 1
       end
       
