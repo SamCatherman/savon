@@ -220,7 +220,6 @@ module Savon
     end
 
     def namespace_by_uri(uri)
-      puts "namespaces.inspect: #{namespaces.inspect}"
       namespaces.each do |candidate_identifier, candidate_uri|
         return candidate_identifier.gsub(/^xmlns:/, '') if candidate_uri == uri
       end
