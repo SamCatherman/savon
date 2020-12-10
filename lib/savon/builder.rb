@@ -29,8 +29,8 @@ module Savon
 
       @types = convert_type_definitions_to_hash
       @used_namespaces = convert_type_namespaces_to_hash
-      puts "INITIALIZE"
-      puts "@used_namespaces: #{@used_namespaces}"
+      puts "INITIALIZED (check @used_namespaces)"
+      byebug
     end
 
     def pretty
@@ -102,6 +102,10 @@ module Savon
     def use_namespace(path, uri)
       @internal_namespace_count ||= 0
       unless identifier = namespace_by_uri(uri)
+        # there are 3 paths that have no namespace_by_uri
+          # http://www.opentravel.org/OTA/2003/05,
+          # http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+          # http://htng.org/PWSWG/2007/02/AsyncHeaders
         identifier = "ins#{@internal_namespace_count}"
         puts "***************************************"
         puts "mismatch: #{identifier}"
@@ -125,6 +129,8 @@ module Savon
         namespaces = SCHEMA_TYPES.dup
 
         if namespace_identifier == nil
+          # namespace identifier is nil, so we get 'xmlns' => "http://synxis.com/Ota2010a/"
+          # this is set in @wsdl... when???
           namespaces["xmlns"] = @globals[:namespace] || @wsdl.namespace
         else
           namespaces["xmlns:#{namespace_identifier}"] = @globals[:namespace] || @wsdl.namespace
@@ -214,12 +220,9 @@ module Savon
     end
 
     def namespace_by_uri(uri)
+      puts "namespaces.inspect: #{namespaces.inspect}"
       namespaces.each do |candidate_identifier, candidate_uri|
-        if candidate_uri == uri
-          puts "candidate_identifier: #{candidate_identifier}"
-          puts "candidate_uri: #{candidate_uri}"
-          return candidate_identifier.gsub(/^xmlns:/, '') 
-        end
+        return candidate_identifier.gsub(/^xmlns:/, '') if candidate_uri == uri
       end
       puts "namespace_by_uri returning nil!: #{namespaces.inspect}"
       puts "namespace_by_uri uri: #{uri}"
