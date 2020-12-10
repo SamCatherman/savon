@@ -101,15 +101,17 @@ module Savon
 
     def use_namespace(path, uri)
       @internal_namespace_count ||= 0
-      puts "use namespace path: #{path}"
-      puts "use namespace uri: #{uri}"
       unless identifier = namespace_by_uri(uri)
-        byebug
         identifier = "ins#{@internal_namespace_count}"
+        puts "***************************************"
+        puts "mismatch: #{identifier}"
+        puts "mismatch: #{path}"
+        puts "mismatch: #{uri}"
+        puts "***************************************"
         namespaces["xmlns:#{identifier}"] = uri
         @internal_namespace_count += 1
       end
-
+      
       [path, identifier]
     end
 
@@ -119,6 +121,7 @@ module Savon
 
     def namespaces
       @namespaces ||= begin
+        byebug
         namespaces = SCHEMA_TYPES.dup
 
         if namespace_identifier == nil
