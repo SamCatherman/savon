@@ -93,7 +93,6 @@ module Savon
 
     def convert_type_namespaces_to_hash
       @wsdl.type_namespaces.inject({}) do |memo, (path, uri)|
-        byebug
         key, value = use_namespace(path, uri)
         memo[key] = value
         memo
@@ -223,7 +222,6 @@ module Savon
 
     def namespace_by_uri(uri)
       namespaces.each do |candidate_identifier, candidate_uri|
-        byebug
         if candidate_uri == uri
           return candidate_identifier.gsub(/^xmlns:/, '')
         end
