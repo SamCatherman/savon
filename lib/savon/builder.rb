@@ -223,6 +223,7 @@ module Savon
 
     def namespace_by_uri(uri)
       namespaces.each do |candidate_identifier, candidate_uri|
+        byebug
         if candidate_uri == uri
           return candidate_identifier.gsub(/^xmlns:/, '')
         end
