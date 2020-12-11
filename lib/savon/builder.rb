@@ -39,7 +39,6 @@ module Savon
 
     def build_document
       xml_result = tag(builder, :Envelope, namespaces_with_globals) do |xml|
-        byebug
         tag(xml, :Header, header_attributes) { xml << header.to_s } unless header.empty?
         if @globals[:no_message_tag]
           tag(xml, :Body, body_attributes) { xml << message.to_s }
@@ -94,6 +93,7 @@ module Savon
 
     def convert_type_namespaces_to_hash
       @wsdl.type_namespaces.inject({}) do |memo, (path, uri)|
+        byebug
         key, value = use_namespace(path, uri)
         memo[key] = value
         memo
