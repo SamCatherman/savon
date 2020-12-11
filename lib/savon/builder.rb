@@ -39,6 +39,7 @@ module Savon
 
     def build_document
       xml_result = tag(builder, :Envelope, namespaces_with_globals) do |xml|
+        byebug
         tag(xml, :Header, header_attributes) { xml << header.to_s } unless header.empty?
         if @globals[:no_message_tag]
           tag(xml, :Body, body_attributes) { xml << message.to_s }
