@@ -224,10 +224,6 @@ module Savon
     def namespace_by_uri(uri)
       namespaces.each do |candidate_identifier, candidate_uri|
         if candidate_uri == uri
-          puts "match in loop candidate_identifier: #{candidate_identifier}"
-          puts "match in loop candidate_uri: #{candidate_uri}"
-          puts "match in loop uri: #{uri}"
-          puts "REGEX match in loop candidate_identifier.gsub(/^xmlns:/, ''): #{candidate_identifier.gsub(/^xmlns:/, '')}"
           return candidate_identifier.gsub(/^xmlns:/, '')
         end
       end
