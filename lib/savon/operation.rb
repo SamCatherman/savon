@@ -99,9 +99,11 @@ module Savon
       @locals[:soap_action] ||= soap_action
       @globals[:endpoint] ||= endpoint
       puts "operation! @locals[:headers] #{@locals[:headers]}"
-      puts "operation! @locals #{@locals}"
-      puts "operation! @global #{@global}"
-      puts "operation! @builder.inspect #{@builder.inspect}"
+      puts "operation! @locals #{@locals.inspect}"
+      puts "operation! @globals #{@globals.inspect}"
+      puts "operation! soap_action #{soap_action}"
+      puts "operation! endpoint #{endpoint}"
+      puts "operation! builder.inspect #{builder.inspect}"
       puts "#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 
       request = SOAPRequest.new(@globals).build(
