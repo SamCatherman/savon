@@ -70,12 +70,7 @@ module Savon
     end
 
     def header_attributes
-      @globals[:use_wsa_headers] ? { 'xmlns:wsa' => WSA_NAMESPACE } : {
-        'xmlns:soap' => "http://www.w3.org/2003/05/soap-envelope",
-            'xmlns:wsa' => "http://www.w3.org/2005/08/addressing",
-            'xmlns:wss' => "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
-            'xmlns:htnga' => "http://htng.org/PWSWG/2007/02/AsyncHeaders"
-        }
+      @globals[:use_wsa_headers] ? { 'xmlns:wsa' => WSA_NAMESPACE } : {}
     end
 
     def body_attributes
