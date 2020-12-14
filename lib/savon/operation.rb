@@ -97,7 +97,8 @@ module Savon
     def build_request(builder)
       @locals[:soap_action] ||= soap_action
       @globals[:endpoint] ||= endpoint
-
+      puts "operation!"
+      byebug
       request = SOAPRequest.new(@globals).build(
         :soap_action => soap_action,
         :cookies     => @locals[:cookies],
