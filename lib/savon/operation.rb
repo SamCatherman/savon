@@ -93,12 +93,17 @@ module Savon
     def call_with_logging(request)
       @logger.log(request) { HTTPI.post(request, @globals[:adapter]) }
     end
-
+    
     def build_request(builder)
+      puts "#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
       @locals[:soap_action] ||= soap_action
       @globals[:endpoint] ||= endpoint
-      puts "operation!"
-      byebug
+      puts "operation! @locals[:headers] #{@locals[:headers]}"
+      puts "operation! @locals #{@locals}"
+      puts "operation! @global #{@global}"
+      puts "operation! @builder.inspect #{@builder.inspect}"
+      puts "#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+
       request = SOAPRequest.new(@globals).build(
         :soap_action => soap_action,
         :cookies     => @locals[:cookies],
