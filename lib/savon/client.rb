@@ -43,7 +43,6 @@ module Savon
 
     def build_request(operation_name, locals = {}, &block)
       puts "client!"
-      byebug
       operation(operation_name).request(locals, &block)
     end
 
