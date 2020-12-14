@@ -30,7 +30,7 @@ module Savon
       @types = convert_type_definitions_to_hash
       @used_namespaces = convert_type_namespaces_to_hash
       puts "INITIALIZED (check @used_namespaces)"
-      byebug
+      # byebug
     end
 
     def pretty
